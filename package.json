@@ -1,6 +1,6 @@
 {
     "name" : "lump",
-    "description" : "lump records into n buckets of equal size",
+    "description" : "count records in n contiguous buckets of equal size",
     "version" : "0.0.0",
     "repository" : {
         "type" : "git",
