@@ -1,0 +1,41 @@
+{
+    "name" : "lump",
+    "description" : "lump records into n buckets of equal size",
+    "version" : "0.0.0",
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/substack/node-lump.git"
+    },
+    "main" : "index.js",
+    "keywords" : [
+        "bucket",
+        "algorithm",
+        "stats",
+        "statistics",
+        "count",
+        "min",
+        "max"
+    ],
+    "directories" : {
+        "example" : "example",
+        "test" : "test"
+    },
+    "scripts" : {
+        "test" : "tap test/*.js"
+    },
+    "dependencies" : {
+        "pathway" : "~0.0.2"
+    },
+    "devDependencies" : {
+        "tap" : "~0.2.5"
+    },
+    "engines" : {
+        "node" : ">=0.4.0"
+    },
+    "license" : "MIT",
+    "author" : {
+        "name" : "James Halliday",
+        "email" : "mail@substack.net",
+        "url" : "http://substack.net"
+    }
+}
