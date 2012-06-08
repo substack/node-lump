@@ -2,7 +2,22 @@ var Stream = require('stream');
 var util = require('util');
 var pathway = require('pathway');
 
-module.exports = function (opts) {
+exports = module.exports = function (opts, size, path) {
+    if (size === undefined) {
+        // everything in opts
+    }
+    else if (Array.isArray(size)) {
+        opts = { data : opts, path : size };
+    }
+    else {
+        opts = { data : opts, size : size, path : path };
+    }
+    
+    var data = opts.path ? pathway(opts.data, opts.path) : opts.data;
+    return computeLumps(data, opts.size);
+};
+
+exports.stream = function (opts) {
     return new Lump(opts);
 };
 
@@ -20,22 +35,7 @@ function Lump (opts, path) {
 util.inherits(Lump, Stream);
 
 Lump.prototype.lumps = function () {
-    var min = Math.min.apply(null, this.data);
-    var max = Math.max.apply(null, this.data);
-    var step = (max - min) / this.size;
-    
-    var lumps = [];
-    var sorted = this.data.sort();
-    var ix = 0;
-    
-    for (var x = min; x < max; x += step) {
-        var lump = { min : x, max : x + step, count : 0 };
-        for (; sorted[ix] < x + step; ix++) {
-            lump.count ++;
-        }
-        lumps.push(lump);
-    }
-    return lumps;
+    return computeLumps(this.data, this.size);
 };
 
 Lump.prototype.write = function (obj) {
@@ -47,3 +47,22 @@ Lump.prototype.write = function (obj) {
 Lump.prototype.end = function () {
     this.emit('end');
 };
+
+function computeLumps (data, size) {
+    var min = Math.min.apply(null, data);
+    var max = Math.max.apply(null, data);
+    var step = (max - min) / size;
+    
+    var lumps = [];
+    var sorted = data.sort();
+    var ix = 0;
+    
+    for (var x = min; x < max; x += step) {
+        var lump = { min : x, max : x + step, count : 0 };
+        for (; sorted[ix] < x + step; ix++) {
+            lump.count ++;
+        }
+        lumps.push(lump);
+    }
+    return lumps;
+}
