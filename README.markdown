@@ -3,6 +3,8 @@ lump
 
 Count records in `n` contiguous buckets of equal size.
 
+[![build status](https://secure.travis-ci.org/substack/node-lump.png)](http://travis-ci.org/substack/node-lump)
+
 example
 =======
 
