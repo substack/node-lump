@@ -27,7 +27,8 @@
         "pathway" : "~0.0.2"
     },
     "devDependencies" : {
-        "tap" : "~0.2.5"
+        "tap" : "~0.2.5",
+        "JSONStream" : "~0.2.2"
     },
     "engines" : {
         "node" : ">=0.4.0"
